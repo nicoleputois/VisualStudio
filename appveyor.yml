@@ -20,10 +20,8 @@ install:
     nuget restore GitHubVS.sln
 build_script:
 - ps: scripts\build.ps1 -AppVeyor -BuildNumber:$env:APPVEYOR_BUILD_NUMBER
-test:
-  categories:
-    except:
-      - Timings
+test_script:
+- cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.Api.UnitTests\bin\Release\net461\GitHub.Api.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.App.UnitTests\bin\Release\net461\GitHub.App.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.Exports.Reactive.UnitTests\bin\Release\net461\GitHub.Exports.Reactive.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.Exports.UnitTests\bin\Release\net461\GitHub.Exports.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.Extensions.UnitTests\bin\Release\net461\GitHub.Extensions.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.InlineReviews.UnitTests\bin\Release\net461\GitHub.InlineReviews.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.TeamFoundation.UnitTests\bin\Release\net461\GitHub.TeamFoundation.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.UI.UnitTests\bin\Release\net461\GitHub.UI.UnitTests.dll" "C:\projects\visualstudio\test\GitHub.VisualStudio.UnitTests\bin\Release\net461\GitHub.VisualStudio.UnitTests.dll" "C:\projects\visualstudio\test\MetricsTests\MetricsTests\bin\Release\MetricsTests.dll" "C:\projects\visualstudio\test\TrackingCollectionTests\bin\Release\net461\TrackingCollectionTests.dll" --where "cat != Timings" --result=myresults.xml;format=AppVeyor --trace=Verbose
 on_success:
 - ps: |
     if ($full_build) {
