@@ -22,7 +22,9 @@ build_script:
 - ps: scripts\build.ps1 -AppVeyor -BuildNumber:$env:APPVEYOR_BUILD_NUMBER
 test_script:
 - cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.Api.UnitTests\bin\Release\net461\GitHub.Api.UnitTests.dll" --where "cat != Timing" --result=GitHub.Api.UnitTests.xml;format=AppVeyor
-- cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.App.UnitTests\bin\Release\net461\GitHub.App.UnitTests.dll" --where "cat != Timing" --result=GitHub.App.UnitTests.xml;format=AppVeyor
+- cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.App.UnitTests\bin\Release\net461\GitHub.App.UnitTests.dll" --where "cat != Timing && namespace =~ ^GitHub\.App\.UnitTests($|\.)" --result=GitHub.App.UnitTests1.xml;format=AppVeyor
+- cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.App.UnitTests\bin\Release\net461\GitHub.App.UnitTests.dll" --where "cat != Timing && namespace =~ ^UnitTests\.GitHub\.App($|\.)" --result=GitHub.App.UnitTests2.xml;format=AppVeyor
+- cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.App.UnitTests\bin\Release\net461\GitHub.App.UnitTests.dll" --where "cat != Timing" --result=GitHub.App.UnitTests3.xml;format=AppVeyor
 - cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.Exports.Reactive.UnitTests\bin\Release\net461\GitHub.Exports.Reactive.UnitTests.dll" --where "cat != Timing" --result=GitHub.Exports.Reactive.UnitTests.xml;format=AppVeyor
 - cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.Exports.UnitTests\bin\Release\net461\GitHub.Exports.UnitTests.dll" --where "cat != Timing" --result=GitHub.Exports.UnitTests.xml;format=AppVeyor
 - cmd: nunit3-console "C:\projects\visualstudio\test\GitHub.Extensions.UnitTests\bin\Release\net461\GitHub.Extensions.UnitTests.dll" --where "cat != Timing" --result=GitHub.Extensions.UnitTests.xml;format=AppVeyor
